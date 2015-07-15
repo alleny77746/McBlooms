@@ -20,10 +20,4 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  ckeditor:
-    page_title: "CKEditor Files Manager"
-    confirm_delete: "Delete file?"
-    buttons:
-      cancel: "Cancel"
-      upload: "Upload"
-      delete: "Delete"
+  hello: "Hello world"
