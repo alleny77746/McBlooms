@@ -1,0 +1,10 @@
+- title "<%= singular_table_name %>"
+dl.dl-horizontal
+<% attributes.each do |attribute| -%>
+  dt <%= attribute.human_name %>
+  dd = @<%= singular_table_name %>.<%= attribute.name %>
+<% end -%>
+
+.btn-group
+  = link_to_btn 'Edit', ["edit", @<%= singular_table_name %>], icon: 'pencil', type: :primary if can? :edit, @<%= singular_table_name %>
+  = link_to_btn 'Back', [<%= singular_table_name.classify %>], icon: "arrow-left"

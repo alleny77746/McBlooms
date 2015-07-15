@@ -1,0 +1,19 @@
+= simple_form_for([:my_profile, @address]) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name
+    = f.input :street
+    = f.input :street2
+    = f.input :city
+    = f.input :province
+    = f.input :country
+    = f.input :postal_code
+    = f.input :default, as: :radio_buttons
+
+    
+  .form-actions
+    = f.button :submit 
+    span.or  or  
+    = link_to "Cancel", my_profile_addresses_path, class: "btn-cancel"
+

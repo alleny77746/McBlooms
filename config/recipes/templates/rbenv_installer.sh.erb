@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+# Sourced from: https://github.com/rinrinne/install-shared-rbenv
+
+set -e
+
+[ ! -z $RBENV_ROOT ] || RBENV_ROOT=<%= rbenv_root %>
+
+echo Install rbenv to $RBENV_ROOT...
+
+if [ -d $RBENV_ROOT ]; then
+  echo rbenv is already installed. So updating...
+  cd $RBENV_ROOT
+  git pull
+else
+  mkdir -p $RBENV_ROOT
+  cd $RBENV_ROOT
+
+  git clone https://github.com/sstephenson/rbenv.git .
+fi
+
+# Install plugins:
+PLUGINS=(
+  sstephenson/rbenv-vars
+  sstephenson/ruby-build
+  sstephenson/rbenv-default-gems
+  fesplugas/rbenv-installer
+  fesplugas/rbenv-bootstrap
+  rkh/rbenv-update
+  rkh/rbenv-whatis
+  rkh/rbenv-use
+)
+
+for plugin in ${PLUGINS[@]} ; do
+
+  KEY=${plugin%%/*}
+  VALUE=${plugin#*/}
+
+  RBENV_PLUGIN_ROOT="${RBENV_ROOT}/plugins/$VALUE"
+  if [ ! -d "$RBENV_PLUGIN_ROOT" ] ; then
+    git clone https://github.com/$KEY/$VALUE.git $RBENV_PLUGIN_ROOT
+  else
+    cd $RBENV_PLUGIN_ROOT
+    echo "Pulling $VALUE updates."
+    git pull
+  fi
+done
+
+chmod a+w $RBENV_ROOT -R

@@ -1,0 +1,6 @@
+.col-sm-4
+  = div_for address, data: {prefill: address.prefill_hash} do
+    .well.well-sm
+      = link_to "#", class:"address-prefill" do
+        h5 #{address.name || "Address"} #{default_icon(address)}
+        = address.to_html

@@ -1,0 +1,37 @@
+class Menu
+  TYPES = [:main_navigation, :top_navigation, :footer]
+
+  include Mongoid::Document
+  include Mongoid::Timestamps
+  field :title, type: String
+  field :url, type: String
+  field :type, type: String
+  field :position, type: Integer, default: 5
+  belongs_to :page
+
+  validates :title, presence: true
+  validates :type, presence: true
+  validate :has_link, :valid_type
+
+  default_scope lambda { order_by(position: 1).includes(:page) }
+
+  def self.type_collection
+    TYPES.map { |type| [type.to_s.humanize, type] }
+  end
+
+  def link
+    url.present? ? url : page
+  end
+
+  #######
+  private
+  #######
+  
+  def has_link
+    errors.add(:url, "Must have either a page link or a URL") if url.blank? && page.nil?
+  end
+
+  def valid_type
+    errors.add(:type, "Unkown type, must be on of #{TYPES.to_sentence(last_word_connector: ", or ", two_words_connector: " or ")}") unless TYPES.include?(type.try(:to_sym))
+  end
+end

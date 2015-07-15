@@ -1,0 +1,24 @@
+- title "Listing prices"
+
+table.table
+  thead
+    tr
+      th Size
+      th Amount
+      th Name
+      th Target
+      th
+      th
+  tbody
+    - @prices.each do |price|
+      tr
+        td = price.size
+        td = price.amount
+        td = price.name
+        td = price.target
+        td = link_to_btn '', ["edit", category, product, price], icon: "pencil", type: :info, data: {toggle: "tooltip"}, title: "Edit", size: "sm"
+        td = link_to_btn '', [category, product, price], :confirm => 'Are you sure?', :method => :delete, icon: "remove", type: :danger, data: {toggle: "tooltip"}, title: "Delete", size: "sm"
+
+.btn-group
+  = link_to_btn 'New Price', ["new", category, product, "price"], icon: "plus", type: :primary
+  = link_to_btn "Back to #{product.name}", [category, product], icon: "arrow-left"

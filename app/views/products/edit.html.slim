@@ -1,0 +1,8 @@
+- title "Editing product"
+
+== render 'form'
+
+.btn-group
+  = link_to_btn 'Back to products', [@category, "products"], icon: 'arrow-left'
+  = link_to_btn "Show #{@product.name}", [@category, @product]
+

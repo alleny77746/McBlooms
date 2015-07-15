@@ -1,0 +1,5 @@
+- title "Favorites"
+= render current_user.favorite_products
+- if current_user.favorite_products.empty?
+  .alert.alert-info
+    | No favorites found, why not checkout our #{link_to "products", categories_path}

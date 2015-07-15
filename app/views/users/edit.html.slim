@@ -1,0 +1,8 @@
+- title "Editing #{@user.name}"
+
+== render 'form'
+
+.btn-group
+  = link_to_btn 'Back to users', User, icon: 'arrow-left'
+  = link_to_btn "Show #{@user.name}", @user
+

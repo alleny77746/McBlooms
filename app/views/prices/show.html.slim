@@ -1,0 +1,16 @@
+- title "price"
+dl.dl-horizontal
+  dt Size
+  dd = @price.size
+  dt Amount
+  dd = @price.amount
+  dt Name
+  dd = @price.name
+  dt Brief
+  dd = @price.brief
+  dt Target
+  dd = @price.target
+
+.btn-group
+  = link_to_btn 'Edit', edit_price_path(@price), icon: 'pencil', type: :primary if can? :edit, @price
+  = link_to_btn 'Back', prices_path, icon: "arrow-left"

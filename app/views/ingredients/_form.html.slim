@@ -1,0 +1,23 @@
+= simple_form_for(@ingredient, html: {multipart: true}) do |f|
+  = f.error_notification
+
+  = f.input :name
+  = f.input :description, as: :text
+
+
+  - if @ingredient.image?
+    .current-image.row
+      .col-sm-4.col-sm-offset-2
+        | current image:
+        = image_tag @ingredient.image.url(:thumb)
+
+    = f.input :remove_image, as: :radio_buttons
+  = f.input :image, as: :file
+  = f.association :products, label_method: "name", value_method: 'id', input_html: { data: { toggle:'select2' },  multiple:true }
+
+  = f.input :key, as: :radio_buttons, hint: "Key ingredients are the only ingredients shown under 'Our Ingredients' section"
+
+  .form-actions
+    = f.button :submit
+    span.or  or
+    = link_to "Cancel", categories_path, class: "btn-cancel"

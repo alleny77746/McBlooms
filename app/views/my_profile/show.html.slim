@@ -1,0 +1,12 @@
+- title "Profile for #{@user.name}"
+dl.dl-horizontal
+  dt First Name
+  dd = @user.first_name
+  dt Last Name
+  dd = @user.last_name
+  dt Email
+  dd = mail_to @user.email
+  
+
+.btn-group.actions
+  = link_to_btn "Edit Profile", edit_my_profile_path(), type: :primary, icon: :pencil if can? :edit, @user

@@ -1,0 +1,20 @@
+= simple_form_for([category, product, @price]) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :size_id, collection: product.sizes.map{|s| [s, s.id]}, as: :radio_buttons, hint: "To add different size, please edit the product #{link_to "here", ["edit", category, product]}".html_safe
+    = f.input :quantity, hint: "How many of the size above are included for this price? (e.g. case would include 12 bottles). For single units please enter 1"
+    = f.input :amount, hint: "What is the cost for this?"
+    = f.input :name, hint: "(e.g. Case of 6 oz bottles) - if blank it will be auto generated"
+    = f.input :brief, hint: "Why is this price different from all the other prices for this product?"
+    = f.input :target, collection: Price.target_collection, as: :radio_buttons, hint: "Select who can see these prices?"
+
+  fieldset.featurable
+    legend Homepage Feature
+    = nested_objects(f, :featured_products)
+
+  .form-actions
+    = f.button :submit
+    span.or  or
+    = link_to "Cancel", [category, product, Price], class: "btn-cancel"
+

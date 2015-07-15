@@ -1,0 +1,5 @@
+=content_tag_for(:article, featured_product, class: "col-sm-4 text-center") do
+  = link_to product_path(featured_product.product_slug) do
+    h3 = featured_product.product_name
+    = image_tag featured_product.product_list_image, alt: featured_product.product_name, class: "img-responsive img-center"
+    .price = featured_product.price_amount

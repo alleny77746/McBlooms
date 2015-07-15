@@ -1,0 +1,27 @@
+.dropdown-menu{
+  z-index: 1010;
+}
+
+.nav-tabs{
+  margin-bottom:10px;
+}
+
+.modal{
+  z-index: 1200;
+  .modal-dialog{
+    width:90%;
+  }
+}
+
+form{
+  .radio, .checkbox{
+
+    input.form-control{
+      width:auto;
+      display:inline-block;
+      border:none;
+      line-height:1em;
+      height:auto;
+    }
+  }
+}

@@ -1,0 +1,33 @@
+- title "Your basket"
+#cart
+  -if current_cart.empty?
+    .alert.alert-info
+      | Your basket is 
+      b empty
+      | , but please feel free to view our #{link_to "products", categories_path}
+    
+  = simple_form_for current_cart, url: cart_path, method: :PATCH do |f|
+    table.table-striped.table-hover
+      thead
+        th
+          td.name Name
+          td.price Price
+          td.quantity Quantity
+          td.total Total
+      tbody
+        = f.simple_fields_for(:items) do |fi|
+          = render fi.object, f: fi
+      tfoot
+        th
+          td.text-right colspan="3" Grand Total:
+          td.grand-total.text-center = number_to_currency current_cart.total 
+
+    .actions
+      .btn-toolbar.pull-right
+        - unless current_cart.empty?
+          .btn-group
+            = link_to_btn "Clear Your Basket", cart_path, method: :delete, type: :danger, icon: 'trash', data: {comfirm: "Are you sure you want to clear your basket?"}
+          .btn-group
+            = link_to_btn "Continue Shopping", url_for(:back) == request.url ? categories_path : :back, icon: 'reply'
+            = f.submit "Update Basket", class: 'btn btn-info'
+            = f.submit "Checkout", class: 'btn btn-primary'

@@ -1,0 +1,6 @@
+check process sidekiq_<%= application %>_<%= rails_env %>
+  with pidfile <%= sidekiq_pid %>
+  start program = "bundle exec sidekiq -C <%= sidekiq_config %> -P <%= sidekiq_pid %>" with timeout 90 seconds
+  stop program = "kill -s INT `cat <%= sidekiq_pid %>`" with timeout 90 seconds
+  if totalmem is greater than 200 MB for 2 cycles then restart # eating up memory?
+  group <%= application %>_<%= rails_env %>_sidekiq

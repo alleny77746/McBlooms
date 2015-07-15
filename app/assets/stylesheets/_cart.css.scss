@@ -1,0 +1,27 @@
+#cart{
+  table{
+    width:100%;
+    td{
+
+      &.name{
+        width:70%;
+        img{
+          vertical-align:middle;
+          margin-right: 10px;
+        }
+      }
+      &.price, &.quantity, &.total{
+        width:10%;
+        text-align: center;
+      }
+    }
+    tfoot{
+      td{
+        font-weight: 700;
+      }
+    }
+  }
+  .actions{
+    margin: 20px 0 10px;
+  }
+}

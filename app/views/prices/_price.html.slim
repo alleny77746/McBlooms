@@ -1,0 +1,14 @@
+- if can? :show, price
+  = div_for(price, class: "") do
+    .name = price.name
+    .row
+      .amount.col-sm-6
+        = number_to_currency price.amount
+      .add-to-cart.col-sm-6
+        = link_to_btn "Add to cart", add_to_cart_path(price.product, price), method: :post, type: :primary, icon: 'shopping-cart', class: "pull-right"
+    -if can? :manage, price
+      .actions
+        .btn-group.pull-right
+          = link_to_btn "", ["edit", @category, @product, price], size: :xs, icon: "pencil"
+          = link_to_btn "", [@category, @product, price], size: :xs, type: :danger, icon: "times", data: {confirm: "Remove this price?"}
+        span.hint Visible to #{price.target.humanize}

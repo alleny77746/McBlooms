@@ -1,0 +1,8 @@
+- title "Editing category"
+
+== render 'form'
+
+.btn-group
+  = link_to_btn 'Back to categories', categories_path, icon: 'arrow-left'
+  = link_to_btn "Show #{@category.name}", @category
+

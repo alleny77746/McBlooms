@@ -1,0 +1,24 @@
+- title @ingredient.name
+.row
+  .col-sm-4.centered
+    = image_tag @ingredient.image.url(:list), alt: @ingredient.name, class: "img-responsive"
+  .col-sm-8
+    p = @ingredient.description
+
+section
+  h3 Products with #{@ingredient.name}
+  .row
+    - if @ingredient.products.present?
+      - @ingredient.products.each do |product|
+        .col-sm-3.centered
+          = link_to prop_path(product), target: "_blank" do
+            = image_tag product.image.url(:list), class: "img-responsive", alt: product.name, title: product.name
+            h5 = product.name
+    -else
+      .alert.alert-info Currently not products have #{@ingredient.name}
+
+
+.actions.btn-group
+  = list_btn_for @ingredient
+  = edit_btn_for @ingredient
+  = delete_btn_for @ingredient

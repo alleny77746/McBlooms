@@ -1,0 +1,63 @@
+- title "Checkout"
+#cart.checkout
+  .summery
+    = render 'cart_summery'
+
+  = simple_form_for(@cart, url: cart_checkout_path, method: :post) do |f|
+    = f.error_notification
+    = f.error :base
+
+    - if @cart.registration_required?
+      .register_or_signin.row
+        fieldset.col-sm-6.registeration
+          legend Register
+          = f.input :first_name
+          = f.input :last_name
+          = f.input :email, required: true
+          = f.input :password, required: true
+          = f.input :password_confirmation, required: true
+        fieldset.col-sm-6.signin
+          legend Sign In
+          p.lead
+            | Already have an account with us?
+            br
+            | Why not #{link_to "sign in", signin_path}
+
+    .row.addresses
+      .col-sm-6.billing
+        fieldset
+          legend Billing Address
+          .prefill
+            h4 Select address or fill form below
+            = select_prefillable_address
+          = f.simple_fields_for "billing_address" do |bf|
+            = render "address_form", f: bf
+      .col-sm-6.shipping
+        fieldset
+          legend Shipping Address
+          .prefill
+            h4 Select address or fill form below
+            = select_prefillable_address
+          p
+            = link_to_btn "Same as billing", "#", type: :info, icon: 'copy', class:"same-as-billing"
+          = f.simple_fields_for "shipping_address" do |sf|
+            = render "address_form", f: sf
+    .credit-card
+      h3 Payment Method
+      = simple_fields_for('cart[credit_card_attributes]', @cart.credit_card, root: :cart) do |ccf|
+        = ccf.input :brand, collection: [['Visa', :visa], ['Master Card', :mastercard]], as: :radio_buttons
+        = ccf.input :number
+        = ccf.input :name, label: "Name on card"
+        = ccf.input :expiry, label: "Expiry Date", wraper_html: "#{"has-error" unless ccf.object.errors[:month].empty? && ccf.object.errors[:year].empty?}" do
+          .col-sm-6 class="#{"has-error" unless ccf.object.errors[:month].empty?}"
+            = ccf.input_field :month, collection: (1..12), prompt: "Month", class: "form-control"
+            = ccf.error :month
+          .col-sm-6 class="#{"has-error" unless ccf.object.errors[:month].empty?}"
+            = ccf.input_field :year, collection: (Date.today.year..Date.today.year + 10), prompt: "Year", class: "form-control"
+            = ccf.error :year
+        = ccf.input :verification_value, label: "CVV (3 digits on back of card)"
+    .form-actions
+      = f.submit "Checkout", class: 'btn btn-primary'
+      span.or or
+      = link_to 'Cancel', cart_path
+

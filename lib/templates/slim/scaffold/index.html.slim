@@ -1,0 +1,21 @@
+- title "Listing <%= plural_table_name %>"
+
+table.table
+  thead
+    tr
+<% attributes.each do |attribute| -%>
+      th <%= attribute.human_name %>
+<% end -%>
+      th
+      th
+  tbody
+    - @<%= plural_table_name %>.each do |<%= singular_table_name %>|
+      tr
+<% attributes.each do |attribute| -%>
+        td = <%= singular_table_name %>.<%= attribute.name %>
+<% end -%>
+        td = link_to_btn '', ["edit", <%= singular_table_name %>], icon: "pencil", type: :info, data: {toggle: "tooltip"}, title: "Edit", size: "sm"
+        td = link_to_btn '', <%= singular_table_name %>, :confirm => 'Are you sure?', :method => :delete, icon: "remove", type: :danger, data: {toggle: "tooltip"}, title: "Delete", size: "sm"
+
+.btn-group
+  = link_to_btn 'New <%= human_name %>', ["new", "<%= singular_table_name %>"], icon: "plus", type: :primary

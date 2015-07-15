@@ -1,0 +1,7 @@
+= div_for user, class: 'well well-sm' do
+  - if can? :manage, user
+    .btn-group.actions
+      = edit_btn_for user, size: :xs
+      = delete_btn_for user, size: :xs, data: {confirm: "Are you sure you want to remove #{user.name}?"}
+  h3 = link_to "#{user.name} #{fa_icon(:envelope) if user.mailing_list?}".html_safe, user
+  .permission = user.permission_name

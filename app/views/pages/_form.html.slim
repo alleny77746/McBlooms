@@ -1,0 +1,15 @@
+= simple_form_for(@page) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :title
+    = f.input :content, as: :ckeditor, :input_html => { :ckeditor => {:toolbar => 'Full'} }
+    = f.input :start_on, as: :calendar
+    = f.input :end_on, as: :calendar
+    = f.input :menu_type, label: "Create menu?", collection: Menu.type_collection, include_blank: "No, Thanks" if @page.new_record?
+
+  .form-actions
+    = f.button :submit
+    span.or  or
+    = link_to "Cancel", pages_path, class: "btn-cancel"
+

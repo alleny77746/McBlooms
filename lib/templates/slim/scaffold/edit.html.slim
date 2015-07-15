@@ -1,0 +1,8 @@
+- title "Editing <%= singular_table_name %>"
+
+== render 'form'
+
+.btn-group
+  = link_to_btn 'Back to <%= singular_table_name.pluralize %>', <%= index_helper %>_path, icon: 'arrow-left'
+  = link_to_btn "Show <%= attributes.find{|i| i.name == "name"} ? "\#{@#{singular_table_name}.name}" : singular_table_name %>", @<%= singular_table_name %>
+

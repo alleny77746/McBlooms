@@ -1,0 +1,34 @@
+= simple_form_for([@category, @product], html: {multipart: true}) do |f|
+  = f.error_notification
+
+  = f.input :sku
+  = f.input :name
+  = f.input :brief
+  = f.input :description, as: :ckeditor
+  = f.input :start_date, as: :calendar
+  = f.input :end_date, as: :calendar
+  - if @product.image?
+    .current-image.row
+      .col-sm-4.col-sm-offset-2
+        = image_tag @product.image.url(:thumb)
+
+    = f.input :remove_image, as: :boolean
+  = f.input :image, as: :file
+
+  = f.association :categories, as: :check_boxes, collection: Category.all
+  = f.association :ingredients, label_method: "name", value_method: 'id', input_html: { data: { toggle:'select2' },  multiple:true }
+
+
+  .row
+    .col-sm-12
+      fieldset
+        legend Sizes
+        = nested_objects(f, :sizes)
+
+
+
+  .form-actions
+    = f.button :submit
+    span.or  or
+    = link_to "Cancel", [@category, "products"], class: "btn-cancel"
+

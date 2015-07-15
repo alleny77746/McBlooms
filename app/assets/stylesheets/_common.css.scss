@@ -1,0 +1,61 @@
+form{
+  .form-actions{
+    @media (min-width: $screen-tablet) {
+      @include make-sm-column-offset(2);
+      @include make-sm-column(10);
+      margin-bottom: 25px;
+    }
+    @include clearfix();
+    span{
+      margin: 0 10px;
+    }
+  }
+}
+
+.col-item{
+  text-align: center;
+  margin-bottom:15px;
+  img{
+    margin: auto;
+  }
+}
+
+@media (min-width: $screen-sm) {
+  .sm-text-center{
+    text-align: center;
+    img.img-responsive{
+      margin-left:auto;
+      margin-right:auto;
+    }
+  }
+}
+
+.centered{
+  text-align:center;
+  img.img-responsive{
+    margin-left:auto;
+    margin-right:auto;
+  }
+}
+
+.actions{
+  margin-top:15px;
+}
+
+.well{
+  .actions{
+    float:right;
+  }
+  h2, h3, h4{
+    margin-top:0;
+  }
+}
+
+#sidebar{
+  .nav-pills{
+    li.active > a{
+      color:#fff;
+      background:$mc_green;
+    }
+  }
+}

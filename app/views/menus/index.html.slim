@@ -1,0 +1,14 @@
+- title "Menus"
+- @grouped_menus.each do |type, menus|
+  h3 = type.to_s.humanize
+  ul.list-group
+    - menus.each do |menu|
+      li.list-group-item 
+        = link_to_btn "goto", (menu.url.present? ? menu.url : menu.page), size: :xs, type: :primary
+        |  #{menu.title} 
+        .btn-group.pull-right
+          = link_to_btn "edit", [:edit, menu], size: :xs, type: :primary
+          = link_to_btn "remove", menu, method: :delete, data: {confirm: "Are you sure you want to remove #{menu.title}"}, size: :xs, type: :danger
+    
+
+= link_to_btn "Add new Menu item", new_menu_path(), type: :info, icon: 'plus-sign'

@@ -1,0 +1,11 @@
+= tb_panel do |p|
+  - p.heading { link_to "Order #{order.number}", my_order_path(order) }
+  - p.body do
+    p
+      b Purchase:
+      |  #{order.purchased_at}
+    p
+      b Items:
+      |  #{pluralize(order.items.count, "item")} ordered
+  - p.footer do
+      = link_to_btn "More Info", my_order_path(order), type: :primary

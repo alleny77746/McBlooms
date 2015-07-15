@@ -1,0 +1,13 @@
+table.table-striped.table-hover
+  thead
+    th
+      td.name Name
+      td.price Price
+      td.quantity Quantity
+      td.total Total
+  tbody
+    = render current_cart.items
+  tfoot
+    th
+      td.text-right colspan="3" Grand Total:
+      td.grand-total.text-center = number_to_currency current_cart.total 

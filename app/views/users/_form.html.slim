@@ -1,0 +1,21 @@
+= simple_form_for(@user) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :first_name
+    = f.input :last_name
+    = f.input :email
+    = f.input :permission, collection: User.permission_collection, include_blank: false
+    = f.input :mailing_list, as: :radio_buttons
+
+  fieldset
+    legend Password
+    - if @user.persisted?
+      p.text-danger Leave blank if you don't want to change the current password
+    = f.input :password
+    = f.input :password_confirmation
+
+  .form-actions
+    = f.button :submit
+    span.or  or
+    = link_to "Cancel", @user, class: "btn-cancel"

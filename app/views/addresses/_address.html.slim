@@ -1,0 +1,11 @@
+= div_for(address, class: "col-sm-4 item #{address.default_class}") do
+  h3
+    = address.name
+    - if address.default?
+      span.small default
+  p = address.to_html
+  - if can? :manage, address
+    .btn-group
+      = link_to_btn "Mark as Default", [:mark_default, :my_profile, address], method: :post, type: :primary, icon: :asterisk unless address.default?
+      = link_to_btn "Edit", edit_my_profile_address_path(address), icon: :pencil
+      = link_to_btn "Remove", [:my_profile, address], method: :delete, data: {confirm: "Are you sure?"}, type: :danger, icon: 'times'

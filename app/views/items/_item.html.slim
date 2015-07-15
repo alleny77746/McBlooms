@@ -1,0 +1,17 @@
+= content_tag :tr, item, class: "row cart_item" do
+  td.name
+    - if defined? f
+      = f.hidden_field :_destroy, class: "destroy"
+      = link_to_btn "", '#', icon: "times", size: :xs, type: :danger, data: {toggle: "tooltip"}, title: "Remove #{f.object.name}", class: "pull-right remove", style: "margin-top:12px;"
+    = image_tag item.image.url(:thumb)
+    | #{item.product.name} - #{item.price.name}
+
+  td.price
+   = number_to_currency item.price.amount
+  td.quantity
+    - if defined? f
+      = f.input_field :quantity, as: :number
+    - else
+      = item.quantity
+  td.total
+    = number_to_currency item.total

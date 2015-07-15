@@ -1,0 +1,18 @@
+- title @category.name
+.description = @category.description
+
+- sidebar do
+  ul.nav.nav-pills.nav-stacked
+    = build_nav @categories, match: request.path
+    -if can? :create, Category
+      li = link_to_btn "Add Category", new_category_path, icon: "plus", type: 'link'
+
+
+.products
+  - @category.products.in_groups_of(3, false) do |grouped_products|
+    .row
+      = render grouped_products
+
+.btn-group
+  = link_to_btn 'Edit', edit_category_path(@category), icon: 'pencil', type: :primary if can? :edit, @category
+  = link_to_btn "Add Product to Category", [:new, @category, "product"], icon: 'plus', type: :info if can? :create, Product

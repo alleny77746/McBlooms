@@ -1,0 +1,6 @@
+.item
+  .actions = remove_nested_item(f, size: :xs)
+  = f.input :id, as: :hidden if f.object.persisted?
+  = f.input :start_time, as: :calendar
+  = f.input :end_time, as: :calendar
+  = f.input :importance, as: :number, input_html: {min: 1, max: 10}, hint: "1 being <strong>very important</strong>, 10 being not important at all".html_safe

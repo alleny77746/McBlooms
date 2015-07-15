@@ -1,0 +1,58 @@
+- title @product.name, false
+- if @category
+  - sidebar do
+    h3 = link_to @category.name, @category
+    ul.nav.nav-stacked.nav-pills
+      - @category.products.each do |p|
+        = nav_item(p, href: url_for([@category, p]), match: request.path)
+= div_for @product
+  .row
+    .col-sm-5.product-image
+      = link_to "#", data: {toggle: "modal", target: "#productImage"} do
+        = image_tag @product.image.url(:display), class: "img-responsive", alt: "#{@product.name} image", title: @product.name
+      = tb_modal(id: "productImage") do |m|
+        - m.header @product.name
+        - m.body do
+          a href="#" data-dismiss="modal"
+            = image_tag @product.image.url, class: 'img-responsive'
+      .actions.centered
+        = favorite_btn_for @product
+    .col-sm-7.details
+      h2.product-name = @product.name
+      = tb_tab class: "product-content" do |tab|
+        - tab.add "Description" do
+          == @product.description
+        - tab.add "Ingredients" do
+          - if @product.ingredients.present?
+            .row
+              - @product.ingredients.each do |ingredient|
+                .col-xs-6.centered
+                  = link_to ingredient, target: "_blank" do
+                    = image_tag ingredient.image.url(:list), class: "img-responsive", alt: ingredient.name, title: ingredient.name
+                    h5 = ingredient.name
+          -else
+            .alert.alert-info
+              | No ingredients have been highlighted in #{@product.name}
+      .prices
+        = render @product.prices
+        = link_to_btn "Add a new price", ["new", @category, @product, "price"], icon: :dollar, type: :warning if can? :create, Price
+
+  - if can? :manage, @product
+    fieldset
+      legend More info (only visible to admins)
+      dl.dl-horizontal
+        dt Sku
+        dd = @product.sku
+        dt Name
+        dd = @product.name
+        dt Brief
+        dd = @product.brief
+        dt Start date
+        dd = @product.start_date
+        dt End date
+        dd = @product.end_date
+
+  .btn-group
+    = link_to_btn 'Edit', [:edit, @category, @product], icon: 'pencil', type: :primary if can? :edit, @product
+    = link_to_btn 'Manage Prices', [@category, @product, Price], icon: 'dollar', type: :warning if can? :edit, Price
+    = link_to_btn "Delete Product", [@category, @product], method: 'delete', type: :danger, icon: "times", data: {confirm: "Are you sure?"} if can? :delete, @product

@@ -1,0 +1,19 @@
+- title @user.name
+dl.dl-horizontal
+  dt First Name
+  dd = @user.first_name
+  dt Last Name
+  dd = @user.last_name
+  dt Email
+  dd = mail_to @user.email
+  dt Mailing List
+  dd = @user.mailing_list
+  dt Last Logged In at
+  dd = @user.last_login_at
+  dt Last Activity at
+  dd = @user.last_activity_at
+
+.btn-group.actions
+  = list_btn_for @user, name: "Return to users"
+  = edit_btn_for @user
+  = delete_btn_for @user, data: {confirm: "Are you sure you want to remove #{@user.name}?"}

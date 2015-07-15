@@ -1,0 +1,8 @@
+-title "New Password"
+= simple_form_for @user, :url => password_reset_path(@user), :html => {:method => :put}, class: "form", role: "form" do |f|
+  = f.error_notification
+  = hidden_field_tag :token, @token
+  = f.input :email, disabled: true, required: false
+  = f.input :password, required: true
+  = f.input :password_confirmation, required: true, hint: "Please type in your password again"
+  = f.submit "Reset", class: "btn btn-success col-sm-offset-2"

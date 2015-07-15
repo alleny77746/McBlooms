@@ -1,0 +1,9 @@
+- title "Order #{@order.number}"
+#order
+  p
+    b Order placed: 
+    = @order.purchased_at
+
+  .order_items
+    h3 Items
+    = render partial: "item", collection: @order.items

@@ -1,0 +1,159 @@
+@import "_variables";
+@import "bootstrap/_mixins";
+
+.page-header{
+  margin-top:0px;
+  h1{
+    margin-top:5px;
+  }
+}
+
+header{
+  $header-link-color: #999;
+  a, a.btn{
+    color: $header-link-color;
+  }
+
+  .form-control {
+    height:33px;
+  }
+
+  .toll-free{
+    color:$mc_green;
+    font-weight:900;
+    font-size: ($font-size-base * 1.15);
+    line-height: 1.4;
+
+    @media (min-width: 768px) {
+      font-size: ($font-size-base * 1.3);
+    }    
+  }
+
+  .mainnav{
+    margin-bottom:45px;
+    @media (min-width: $screen-sm) {
+      .main-navbar {
+        @include box-shadow(0px 4px 5px rgba(0,0,0,0.3), inset 0px 4px 5px rgba(0,0,0,0.2));
+        margin-bottom: 0;
+        .nav{
+          @include make-sm-column-offset(2.1);
+        }
+        .active a{
+          @include box-shadow(inset 0px 4px 5px rgba(0,0,0,0.2));
+        }
+      }
+    }
+    .navbar{
+      border:none;
+
+    }
+  }
+  .subnav{
+    margin-top:-45px;
+    z-index: 999;
+  }
+
+  .minor-nav{
+    margin-bottom:5px;
+  }
+
+  .logo{
+    @media (min-width: $screen-sm) {
+      position: absolute;
+      z-index: 1099;
+      margin-left: 22px;
+      background: #fff;
+      padding: 15px 10px 10px;
+      border: 1px solid #ccc;
+      border-top: none;
+    }
+    @media (max-width: $screen-sm - 1) { 
+      padding:20px 0;
+      text-align: center;
+      img{
+        margin:0 auto;
+      }
+    }
+  }
+
+ 
+  .navbar.subnav-navbar{
+    background:transparent;
+    border:none;
+    padding-bottom: 0;
+    border-bottom: 1px solid #ededec;
+    min-height: 40px;
+    
+    .nav{
+      @include make-sm-column-offset(2.2);
+      // @media (min-width: $screen-tablet) {
+        a{
+          color:#8a872d;
+          &:hover{
+            background:#f0f0f0;
+            color:#d05e33;
+          }
+        }
+      // }
+    }
+  }
+}
+
+#main_content{
+  a{
+    color:$mc_red;
+    &.btn{
+      color:white;
+      &.btn-default{
+        color:#333333;
+      }
+    }
+  }
+}
+
+footer{
+  $footer_color: #a7a3a3;
+  border-top:1px solid #ededec;
+  margin-top:10px;
+  padding:0 15px;
+  .navbar{
+    background:transparent;
+    border:none;
+    color:$footer_color;
+
+    p.navbar-text{
+      padding:0 15px;
+    }
+
+    .social-links {
+      @media (min-width: $screen-sm) {
+        a{
+          font-size:1.1em;
+        }
+        .icon-stack{
+          font-size: 0.50em;
+          line-height: 1.5em;
+        }
+      }
+      @media (max-width: $screen-sm - 1) {
+        a{
+          padding: auto 20px;
+          margin: 0 10px;
+          font-size:2em;
+        }
+        .icon-stack{
+          font-size: 0.50em;
+          line-height: 1.5em;
+        }
+      }
+    }
+    a{
+      color:$footer_color;
+      &:hover{
+        background:#ededec;
+        color:darken($footer_color, 20);
+        text-decoration: none;
+      }
+    }
+  }
+}

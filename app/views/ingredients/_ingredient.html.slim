@@ -1,0 +1,7 @@
+= div_for ingredient, class:"col-sm-4 col-item" do
+  = link_to ingredient do
+    = image_tag ingredient.image.url(:list), alt: ingredient.name, class: 'img-responsive'
+    h3 = ingredient.name
+  .actions.btn-group
+    = edit_btn_for ingredient, name: "", size: "sm"
+    = delete_btn_for ingredient, name: "", size: "sm", data: {toggle: "tooltip"}, title: "Delete"

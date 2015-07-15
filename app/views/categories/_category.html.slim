@@ -1,0 +1,10 @@
+= div_for category, class:"col-sm-4 col-item" do
+  = link_to category do
+    = image_tag category.image.url(:list), class: "img-responsive"
+    h3 = category.name
+    .brief = category.brief
+  .btn-group
+    - if can? :edit, category
+      = link_to_btn '', edit_category_path(category), icon: "pencil", data: {toggle: "tooltip"}, title: "Edit", size: "sm"
+    - if can? :delete, category
+      = link_to_btn '', category, method: :delete, icon: "times", type: :danger, data: {toggle: "tooltip", confirm: 'Are you sure?'}, title: "Delete", size: "sm"

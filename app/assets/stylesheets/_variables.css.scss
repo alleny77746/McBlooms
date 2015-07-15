@@ -1,0 +1,15 @@
+$mc_green: #a3a035;
+$mc_red: #d05e33;
+$mc_navbar_color: #f0f0f0;
+
+$navbar-default-bg: $mc_green;
+$navbar-default-link-color: $mc_navbar_color;
+$navbar-default-link-hover-bg: darken($navbar-default-bg, 10%);
+$navbar-default-link-hover-color: $mc_navbar_color;
+$navbar-default-link-active-bg: $mc_red;
+$navbar-default-link-active-color: $mc_navbar_color;
+
+@import 'bootstrap/_variables';
+
+$screen-sm: $screen-tablet;
+$screen-xs: $screen-phone;

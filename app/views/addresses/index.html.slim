@@ -1,0 +1,7 @@
+- title "Your Addresses"
+
+.row.addresses
+  = render @addresses
+
+.btn-group
+  = link_to_btn 'New Address', new_my_profile_address_path, icon: "plus", type: :primary if can? :create, Address

@@ -1,0 +1,11 @@
+- title @page.title, false
+.page-header
+  h1
+    span class="mercury-region" data-type="editable" = @page.title
+.content
+  = @page.content.html_safe
+
+- if can? :manage, @page
+  .btn-group
+    = link_to_btn 'Edit', edit_page_path(@page), icon: 'pencil', type: :primary if can? :edit, @page
+    = link_to_btn "Delete", @page, method: :delete, icon: 'remove', type: :danger, data: {confirm: "Are you sure you want to delete #{@page.title}"} if can? :delete, @page

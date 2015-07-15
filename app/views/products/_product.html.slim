@@ -1,0 +1,9 @@
+= div_for product, class: "col-sm-4 col-item" do
+  = link_to [@category, product] do
+    = image_tag product.image.url(:list), class: "img-responsive"
+    h3 = product.name
+  .brief = product.brief
+  - if can? [:edit, :delete], product
+    .btn-group
+      = link_to_btn "", [:edit, @category, product], icon: 'pencil', size: :sm, data: {toggle: "tooltip"}, title: "Edit product" if can? :edit, product
+      = link_to_btn "", [:edit, @category, product], icon: 'times', size: :sm, type: :danger, title: "Delete", data: {toggle: "tooltip", confirm: "Are you sure you want to remove #{product.name}?"} if can? :delete, product

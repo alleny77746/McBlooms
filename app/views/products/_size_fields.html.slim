@@ -1,0 +1,6 @@
+.item
+  .actions = remove_nested_item(f, size: :xs)
+  = f.input :id, as: :hidden unless f.object.id.nil?
+  = f.input :amount
+  = f.input :unit
+  = f.input :dim_weight, hint: "Integers only"

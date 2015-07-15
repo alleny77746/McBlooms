@@ -1,0 +1,23 @@
+- title "Listing pages"
+
+table.table
+  thead
+    tr
+      th Title
+      th Start on
+      th End on
+      th
+  tbody
+    - @pages.each do |page|
+      tr
+        td
+          b = link_to page.title, page
+        td = page.start_on
+        td = page.end_on || "Never"
+        td
+          .btn-group
+            = link_to_btn '', edit_page_path(page), icon: "pencil", type: :info, data: {toggle: "tooltip"}, title: "Edit", size: "sm"
+            = link_to_btn '', page, :confirm => 'Are you sure?', :method => :delete, icon: "times", type: :danger, data: {toggle: "tooltip"}, title: "Delete", size: "sm"
+
+.btn-group
+  = link_to_btn 'New Page', new_page_path, icon: "plus", type: :primary

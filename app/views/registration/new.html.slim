@@ -1,0 +1,17 @@
+- title "Register for McBlooms"
+
+= simple_form_for(@user, url: register_path) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :first_name
+    = f.input :last_name
+    = f.input :email
+    = f.input :password
+    = f.input :password_confirmation, required: true
+    = f.input :mailing_list, as: :radio_buttons, label: "Join Our Mailing List"
+
+  .form-actions
+    = f.button :submit, "Register"
+    span.or  or
+    = link_to "Sign in", signin_path, class: ""

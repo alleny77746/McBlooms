@@ -1,0 +1,32 @@
+.addresses{
+  & > .address{
+    padding-bottom:15px;
+    &:hover{
+      background:#f0f0f0;
+    }
+    h3 span{
+      float:right;
+      color: #999;
+      font-weight: 100;
+      font-size: 0.7em;
+    }
+    &.default{
+      h3{
+        color: $mc_red;
+      }
+    }
+  }
+}
+
+.prefill .address{
+  .well{
+    -webkit-transition: all 500ms;
+    transition: all 500ms;
+  }
+  & .well:hover{
+    background: #ddd;
+  }
+  a {
+    text-decoration: none;
+  }
+}

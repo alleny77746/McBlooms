@@ -1,0 +1,42 @@
+.form-group{
+  label{
+    text-align: right;
+  }
+}
+
+.nested_set{
+  ol{
+    list-style:none;
+    padding:0;
+  }
+  ol li{
+    border-bottom: 1px solid $gray-lighter;
+    padding-top: 10px;
+    &:first-child{
+      padding-top:0;
+    }
+    &:last-child{
+      border:none;
+    }
+  }
+}
+.item{
+  position: relative;
+  margin-top: 25px;
+  &:hover{
+    background: #fcfcfc;
+  }
+  a.remove_nested_item{
+    position:absolute;
+    top: -20px;
+    right: 0;
+    border:none;
+    color: red !important;
+    background: transparent;
+    &:hover{
+      box-shadow: 0 0 3px rgba(0,0,0,0.3);
+      background-color: red;
+      color: #000 !important;
+    }
+  }
+}

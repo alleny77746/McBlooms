@@ -1,0 +1,7 @@
+check process mysql with pidfile <%= mysql_pid %>
+  group database
+  start program = "/etc/init.d/mysql start" with timeout 60 seconds
+  stop program = "/etc/init.d/mysql stop"
+  if failed host 127.0.0.1 port 3306 protocol mysql for 2 cycles then restart
+  if 5 restarts within 5 cycles then timeout
+  

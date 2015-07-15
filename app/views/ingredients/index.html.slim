@@ -1,0 +1,9 @@
+- title "Out Ingredients", false
+
+= @ingredients.in_groups_of(3,false) do |grouped_ingredients|
+  .row
+    = render grouped_ingredients
+
+
+.actions.btn-group
+  = new_btn_for Ingredient

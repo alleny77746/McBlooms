@@ -1,0 +1,61 @@
+upstream proxy_<%= nginx_application %> {
+  <% roles[:web].servers.each do |server_ip| %>
+    server <%= server_ip %>;
+  <% end %>
+}
+
+<% if production? %>
+server {
+  listen 80;
+  server_name <%= domain[0, 4] == 'www.' ? domain[4, domain.length] : "www.#{domain}" %>;
+  return       301 http://<%= domain %>$request_uri;
+}
+<% end %>
+ 
+server {
+  listen 80;
+  server_name <%= domain %>;
+
+  access_log  /var/log/nginx/log/<%= nginx_application %>.access.log;
+  error_log  /var/log/nginx/log/<%= nginx_application %>.error.log;
+
+  location / {
+    proxy_redirect off;
+    proxy_buffering off;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_pass  http://proxy_<%= nginx_application %>;
+  }
+}
+
+<% if production? && using_ssl? %>
+  server {
+    listen 443;
+    server_name <%= domain %>;
+
+    ssl on;
+    ssl_certificate /etc/nginx/certs/<%= domain %>.crt; 
+    ssl_certificate_key /etc/nginx/certs/<%= domain %>.key; 
+    #ssl_verify_depth 3;
+
+    access_log  /var/log/nginx/log/<%= nginx_application %>.access.log;
+    error_log  /var/log/nginx/log/<%= nginx_application %>.error.log;
+
+    location / {
+      proxy_redirect off;
+      proxy_buffering off;
+      proxy_set_header Host $host;
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+      ### Most PHP, Python, Rails, Java App can use this header ###
+      #proxy_set_header X-Forwarded-Proto https;##
+      #This is better##
+            proxy_set_header        X-Forwarded-Proto $scheme;
+      add_header              Front-End-Https   on;
+
+      proxy_pass  http://proxy_<%= nginx_application %>;
+    }
+  }
+<% end %>

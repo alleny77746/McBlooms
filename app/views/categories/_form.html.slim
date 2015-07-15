@@ -1,0 +1,27 @@
+= simple_form_for(@category, html: {multipart: true}) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name
+    = f.input :brief
+    = f.input :description, as: :text, input_html: {rows: 4}
+    = f.input :start_date, as: :calendar
+    = f.input :end_date, as: :calendar
+    = f.input :position
+
+    fieldset
+      legend Image
+      - if @category.image?
+        .current-image.row
+          .col-sm-4.col-sm-offset-2
+            | current image:
+            = image_tag @category.image.url(:thumb)
+
+        = f.input :remove_image, as: :radio_buttons
+      = f.input :image, as: :file
+
+  .form-actions
+    = f.button :submit
+    span.or  or
+    = link_to "Cancel", categories_path, class: "btn-cancel"
+

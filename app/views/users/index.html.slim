@@ -1,0 +1,6 @@
+- title "Listing Users"
+
+= render @users
+
+.btn-group
+  = link_to_btn 'Add User', [:new, 'user'], icon: "plus", type: :primary if can? :create, User

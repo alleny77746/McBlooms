@@ -1,0 +1,11 @@
+= tb_panel do |p|
+  - p.heading { item.name }
+  - p.body do
+    .col-sm-2.text-center
+      = image_tag item.image.url(:list), class:"img-responsive"
+    .col-sm-10
+      dl.dl-horizontal
+        dt Quantity
+        dd = item.quantity
+        dt Total
+        dd = number_to_currency item.total

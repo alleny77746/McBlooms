@@ -1,0 +1,13 @@
+= simple_form_for(@menu) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :title
+    = f.input :type, collection: Menu::type_collection
+    = f.input :url
+    = f.association :page, collection: Page.all, include_blank: ""
+
+  .form-actions
+    = f.button :submit 
+    span.or  or  
+    = link_to "Cancel", menus_path, class: "btn-cancel"

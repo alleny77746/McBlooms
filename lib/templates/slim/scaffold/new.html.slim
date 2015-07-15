@@ -1,0 +1,5 @@
+- title "New <%= singular_table_name %>"
+
+== render 'form'
+
+= link_to_btn 'Back to <%= singular_table_name.pluralize %>', [<%= singular_table_name.classify %>], icon: "arrow-left"
