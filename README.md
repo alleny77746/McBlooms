@@ -9,7 +9,8 @@ Things you may want to cover:
 * System dependencies
   hello world
   how are you
-
+  not good...
+ 
 * Configuration
 
 * Database creation
