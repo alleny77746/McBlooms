@@ -1,5 +1,6 @@
 # encoding : utf-8
 
+require 'MoneyRails'
 MoneyRails.configure do |config|
 
   # To set the default currency
