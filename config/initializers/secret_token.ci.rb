@@ -11,7 +11,12 @@
 # if you're sharing your code publicly.
 # ay added ... Mcblooms::Application.config.secret_key_base = '37d8787be01c02c60b510d19e469c4f20c1e872434566d601bca32d5a95a5df7bc8e045b5f2ffd55811979ef0a5d476c44e5640673590228c6e2be3de231fbc8'
 
+McBlooms::Application.config.secret_key_base = if Rails.env.development? or Rails.env.test? # generate simple key for test and development environments
+  ('a' * 30) # should be at least 30 chars long
+else
+  ENV['SECRET_TOKEN']
+end
 
-Mcblooms::Application.config.secret_key_base = 'bcd2ce48821102b235f5a714ad68c3253154f408146f2f655816238de91bc0882a9537e27573278e9a1c1d741b0b475140170938f503d900009c967bd78602f1'
+#ay added ...Mcblooms::Application.config.secret_key_base = 'bcd2ce48821102b235f5a714ad68c3253154f408146f2f655816238de91bc0882a9537e27573278e9a1c1d741b0b475140170938f503d900009c967bd78602f1'
 
 

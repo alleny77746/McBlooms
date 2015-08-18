@@ -1,6 +1,7 @@
 form{
   .form-actions{
-    @media (min-width: $screen-tablet) {
+    @media (min-width: 20px) {
+
       @include make-sm-column-offset(2);
       @include make-sm-column(10);
       margin-bottom: 25px;
@@ -20,7 +21,7 @@ form{
   }
 }
 
-@media (min-width: $screen-sm) {
+@media (min-width: 10px) {
   .sm-text-center{
     text-align: center;
     img.img-responsive{

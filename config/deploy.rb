@@ -9,7 +9,9 @@ load "config/recipes/setup_environment"
 set :application, "mcblooms" #This is the name from the gitlab under "Git Clone" 
 
 #GIT
-set :git_repo, "basket-company/mcblooms" #If application can't be the repo nname, change it here
+set :git_repo, "alleny77746/McBlooms"
+#set :git_repo, "basket-company/mcblooms" #If application can't be the repo nname, change it here
+
 
 #############################
 

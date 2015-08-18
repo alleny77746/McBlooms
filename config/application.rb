@@ -8,7 +8,13 @@ Bundler.require(*Rails.groups)
 
 module McBlooms
   class Application < Rails::Application
+   #ay added
+   #config.autoload_paths += %W(#{config.root}/lib)
+   #ay added
+
+
     # Settings in config/environments/* take precedence over those specified here.
+
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
