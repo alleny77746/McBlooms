@@ -1,3 +1,12 @@
+GIT
+  remote: git://github.com/mongoid/moped.git
+  revision: 7ca2de6c4d971d6de56357c496fc8a6dcec437a3
+  specs:
+    moped (2.0.7)
+      bson (~> 3.0)
+      connection_pool (~> 2.0)
+      optionable (~> 0.2.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -92,10 +101,6 @@ GEM
       moped (~> 2.0.0)
       origin (~> 2.1)
       tzinfo (>= 0.3.37)
-    moped (2.0.6)
-      bson (~> 3.0)
-      connection_pool (~> 2.0)
-      optionable (~> 0.2.0)
     multi_json (1.11.2)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
@@ -141,6 +146,8 @@ GEM
     raindrops (0.15.0)
     rake (10.4.2)
     rdoc (4.2.0)
+    responders (2.1.0)
+      railties (>= 4.2.0, < 5)
     sass (3.4.16)
     sass-rails (5.0.3)
       railties (>= 4.0.0, < 5.0)
@@ -191,15 +198,19 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bson
   byebug
   coffee-rails (~> 4.1.0)
   jbuilder (~> 2.0)
   jquery-rails
   money-rails
   mongoid
+  moped!
   psych
+  rack
   rails (= 4.2.3)
   railties
+  responders
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   simple_form

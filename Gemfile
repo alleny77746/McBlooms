@@ -35,6 +35,10 @@ gem 'state_machine' #ay added
 gem 'psych' #ay added
 gem 'railties' #ay added
 gem 'unicorn' #ay added
+gem 'bson' #ay added
+gem 'moped', github: 'mongoid/moped'  #ay added
+gem 'responders' #ay added
+gem 'rack' #ay added
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
