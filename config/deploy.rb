@@ -7,7 +7,7 @@ server "192,168.10.2", :web, :app, :db, primary: true
 set :application, "McBlooms"
 set :user, "greg"
 set :port, 22 #your ssh port
-set :deploy_to, "/home/#{user}/apps/#{application}"
+set :deploy_to, "/home/#{user}/workspace/#{application}"
 set :deploy_via, :remote_cache
 set :use_sudo, false
 

@@ -1,11 +1,12 @@
-root = "/home/greg/apps/mcblooms/current"
+root = "/home/greg/workspace/mcblooms"
+
 
 working_directory root
 pid "#{root}/tmp/pids/unicorn.pid"
 stderr_path "#{root}/log/unicorn.log"
 stdout_path "#{root}/log/unicorn.log"
 
-listen "/tmp/unicorn.your_project.sock"
+listen "/tmp/unicorn.mcblooms.sock"
 worker_processes 2
 timeout 30
 
