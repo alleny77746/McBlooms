@@ -39,6 +39,8 @@ gem 'bson' #ay added
 gem 'moped', github: 'mongoid/moped'  #ay added
 gem 'responders' #ay added
 gem 'rack' #ay added
+gem 'capistrano', '~> 2.15.4'
+gem 'rvm-capistrano', '~> 1.5.1'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

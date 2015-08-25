@@ -1,64 +1,65 @@
-load "config/recipes/base"
-load "config/recipes/bundler"
+require "bundler/capistrano"
+require "rvm/capistrano"
+require 'sidekiq/capistrano'
 
-# set :environments, [:Staging, :Production, :Testing]
-load "config/recipes/setup_environment"
+server "192,168.10.2", :web, :app, :db, primary: true
 
-##### GLOBAL SETTINGS ######
-#APPLICATION
-set :application, "mcblooms" #This is the name from the gitlab under "Git Clone" 
-
-#GIT
-set :git_repo, "alleny77746/McBlooms"
-#set :git_repo, "basket-company/mcblooms" #If application can't be the repo nname, change it here
-
-
-#############################
-
-
-
-### NOTE: DO NOT CHANGE ANYTHING BELOW ###
-
-set :user, 'deployer'
-
-set :scm, :git
-set :repository,  "git@gitlab.anlek.com:#{git_repo}.git"
-
-set :deploy_to, "#{app_path}/#{application}/#{rails_env}"
+set :application, "McBlooms"
+set :user, "greg"
+set :port, 22 #your ssh port
+set :deploy_to, "/home/#{user}/apps/#{application}"
 set :deploy_via, :remote_cache
-
-set :bundle_without, [:development, :test, :mswin]
-
 set :use_sudo, false
 
-set :maintenance_template_path, File.expand_path("../recipes/templates/maintenance.html.erb", __FILE__)
+set :scm, "git"
+set :repository, "alleny77746.git" #your application repo (for instance git@github.com:user/application.git)
+set :branch, "master"
+
 
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
 
-
 after "deploy", "deploy:cleanup" # keep only the last 5 releases
 
+namespace :deploy do
+  %w[start stop restart].each do |command|
+    desc "#{command} unicorn server"
+    task command, roles: :app, except: { no_release: true } do
+      run "/etc/init.d/unicorn_#{application} #{command}"
+    end
+  end
 
+  task :setup_config, roles: :app do
+    # symlink the unicorn init file in /etc/init.d/
+    sudo "ln -nfs #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{application}"
+    # create a shared directory to keep files that are not in git and that are used for the application
+    run "mkdir -p #{shared_path}/config"
+    # if you're using mongoid, create a mongoid.template.yml file and fill it with your production configuration
+    # and add your mongoid.yml file to .gitignore
+    put File.read("config/mongoid.template.yml"), "#{shared_path}/config/mongoid.yml"
+    puts "Now edit the config files in #{shared_path}."
+  end
+  after "deploy:setup", "deploy:setup_config"
 
-### LOAD REQURIEMENTS FOR THIS APP
+  task :symlink_config, roles: :app do
+    # symlink the shared mongoid config file in the current release
+    run "ln -nfs #{shared_path}/config/mongoid.yml #{release_path}/config/mongoid.yml"
+  end
+  after "deploy:finalize_update", "deploy:symlink_config"
 
-load "config/recipes/proxy_server"
-load "config/recipes/nginx"
-load "config/recipes/unicorn"
-load "config/recipes/imagemagick"
-#load "config/recipes/postgresql"
-load "config/recipes/mysql"
-load "config/recipes/mongodb"
-load "config/recipes/nodejs"
-load "config/recipes/rbenv"
-load "config/recipes/check"
-load "config/recipes/rake"
-load "config/recipes/rails"
-# load "config/recipes/depricated"
-# load "config/recipes/sidekiq"
-# load "config/recipes/delayed_job"
-# load "config/recipes/dragonfly"
-load "config/recipes/monit"
-# load "config/recipes/whenever"
-load "config/recipes/logrotate"
+  desc "Create MongoDB indexes"
+  task :mongoid_indexes do
+    run "cd #{current_path} && RAILS_ENV=production bundle exec rake db:mongoid:create_indexes", once: true
+  end
+  after "deploy:update", "deploy:mongoid_indexes"
+
+  desc "Make sure local git is in sync with remote."
+  task :check_revision, roles: :web do
+    unless `git rev-parse HEAD` == `git rev-parse origin/master`
+      puts "WARNING: HEAD is not the same as origin/master"
+      puts "Run `git push` to sync changes."
+      exit
+    end
+  end
+  before "deploy", "deploy:check_revision"
+end
