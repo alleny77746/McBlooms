@@ -1,10 +1,12 @@
 require "bundler/capistrano"
 require "rvm/capistrano"
-require 'sidekiq/capistrano'
+require "capistrano/sidekiq"
+# require 'sidekiq/capistrano'
 
-server "192,168.10.2", :web, :app, :db, primary: true
+server "192.168.10.2", :web, :app, :db, primary: true
 
 set :application, "McBlooms"
+
 set :user, "greg"
 set :port, 22 #your ssh port
 set :deploy_to, "/home/#{user}/workspace/#{application}"
