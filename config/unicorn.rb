@@ -1,4 +1,5 @@
 # Set the current app's path for later reference. Rails.root isn't available at
+
 # this point, so we have to point up a directory.
 # app_path = File.expand_path(File.dirname(__FILE__) + '/..')
 app_path = /home/greg/workspace/McBlooms/
@@ -19,7 +20,7 @@ listen(3000, backlog: 64) if ENV['RAILS_ENV'] == 'development'
 # After the timeout is exhausted, the unicorn worker will be killed and a new
 # one brought up in its place. Adjust this to your application's needs. The
 # default timeout is 60. Anything under 3 seconds won't work properly.
-timeout 200
+timeout 300
 
 
 
