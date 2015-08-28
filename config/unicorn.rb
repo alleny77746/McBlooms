@@ -1,7 +1,7 @@
 # Set the current app's path for later reference. Rails.root isn't available at
 # this point, so we have to point up a directory.
 # app_path = File.expand_path(File.dirname(__FILE__) + '/..')
-app_path = /home/greg/worspace/McBlooms/
+app_path = /home/greg/workspace/McBlooms/
 
 # The number of worker processes you have here should equal the number of CPU
 # cores your server has.
