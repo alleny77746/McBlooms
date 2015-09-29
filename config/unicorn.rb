@@ -7,8 +7,8 @@ app_path = /home/greg/workspace/McBlooms/
 
 # The number of worker processes you have here should equal the number of CPU
 # cores your server has.
-worker_processes (ENV['RAILS_ENV'] == 'production' ? 4 : 1)
-
+# worker_processes (ENV['RAILS_ENV'] == 'production' ? 4 : 1)
+worker_processes 4
 # You can listen on a port or a socket. Listening on a socket is good in a
 # production environment, but listening on a port can be useful for local
 # debugging purposes.
@@ -52,30 +52,4 @@ end
 after_fork do |server, worker|
   defined?(ActiveRecord::Base) &&
     ActiveRecord::Base.establish_connection
-end
-
-
-
-
-#----------------------
-
-#root = "/home/greg/workspace/mcblooms"
-
-#working_directory root
-#pid "#{root}/tmp/pids/unicorn.pid"
-#stderr_path "#{root}/log/unicorn.log"
-#stdout_path "#{root}/log/unicorn.log"
-
-#listen app_path + '/tmp/unicorn.sock', backlog: 64
-
-#listen "/tmp/unicorn.mcblooms.sock"
-
-
-#worker_processes 2
-#timeout 30
-
-# Force the bundler gemfile environment variable to
-# reference the capistrano "current" symlink
-#before_exec do |_|
-#  ENV["BUNDLE_GEMFILE"] = File.join(root, 'Gemfile')
-#end 
+end 

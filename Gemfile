@@ -1,8 +1,7 @@
 source 'https://rubygems.org'
 
-
-
-ruby '2.2.2'
+ruby '2.2.3'
+#ruby '2.2.2'
 #ruby '2.2.0'
 
 
@@ -40,8 +39,10 @@ gem 'moped', github: 'mongoid/moped'  #ay added
 gem 'responders' #ay added
 gem 'rack' #ay added
 gem 'capistrano', '~> 2.15.4'
-gem "capistrano-sidekiq"
+gem 'capistrano-sidekiq' #ay added
 gem 'rvm-capistrano', '~> 1.5.1'
+gem 'sidekiq' #ay addid
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
