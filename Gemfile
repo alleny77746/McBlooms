@@ -1,10 +1,5 @@
 source 'https://rubygems.org'
-
-ruby '2.2.3'
-#ruby '2.2.2'
-#ruby '2.2.0'
-
-
+ruby '2.2.2'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'
 #gem 'rails', '4.2.0'
@@ -40,7 +35,8 @@ gem 'responders' #ay added
 gem 'rack' #ay added
 gem 'capistrano', '~> 2.15.4'
 gem 'capistrano-sidekiq' #ay added
-gem 'rvm-capistrano', '~> 1.5.1'
+gem 'rvm-capistrano', require: false  #ay added reqire false
+
 gem 'sidekiq' #ay addid
 
 

@@ -246,7 +246,7 @@ DEPENDENCIES
   rails (= 4.2.3)
   railties
   responders
-  rvm-capistrano (~> 1.5.1)
+  rvm-capistrano
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   sidekiq
