@@ -13,9 +13,11 @@ set :deploy_to, "/home/#{user}/workspace/#{application}"
 set :deploy_via, :remote_cache
 set :use_sudo, false
 
+
 set :scm, "git"
 # set :repository, "alleny77746.git" #your application repo (for instance git@github.com:user/application.git)
-set :repository, "git@github.com:alleny77746.git/McBlooms.git" #your application repo (for instance git@github.com:user/application.git)
+set :repository, "git@github.com:alleny77746/McBlooms.git" #your application repo (for instance git@github.com:user/application.git)
+
 set :branch, "master"
 
 
