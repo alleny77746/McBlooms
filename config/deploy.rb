@@ -20,7 +20,8 @@ set :git_repo, "basket-company/mcblooms" #If application can't be the repo nname
 set :user, 'deployer'
 
 set :scm, :git
-set :repository,  "git@gitlab.anlek.com:#{git_repo}.git"
+# set :repository,  "git@gitlab.anlek.com:#{git_repo}.git"
+set :repository, "@git@github.com:alleny77746/McBlooms.git"
 
 set :deploy_to, "#{app_path}/#{application}/#{rails_env}"
 set :deploy_via, :remote_cache
