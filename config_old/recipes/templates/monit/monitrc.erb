@@ -1,0 +1,31 @@
+set daemon 30
+
+set logfile /var/log/monit.log
+set idfile /var/lib/monit/id
+set statefile /var/lib/monit/state
+
+set eventqueue
+    basedir /var/lib/monit/events
+    slots 100
+
+set mailserver <%= monit_smtp_server %> port <%= monit_smtp_port %>
+    username "<%= monit_smtp_username %>" password "<%= monit_smtp_password %>"
+    using tlsv1
+    with timeout 30 seconds
+
+set mail-format { from: <%= monit_from_address %> }
+
+set alert <%= monit_to_address %>
+
+set httpd port <%= monit_admin_port %>
+    allow admin:"<%= monit_admin_password %>"
+
+check system <%= monit_server_name.gsub(/\s/, "_") %>
+  if loadavg(5min) > 2 for 4 cycles then alert
+  if memory usage > 75% then alert
+  if swap usage > 25% then alert
+  if cpu(user) > 75% for 4 cycles then alert
+  if cpu usage (system) > 30% for 4 cycles then alert
+  if cpu usage (wait) > 20% for 4 cycles then alert
+
+include /etc/monit/conf.d/*

@@ -1,0 +1,14 @@
+= AnlekLayoutHelper
+
+This project rocks and uses MIT-LICENSE.
+
+== Methods added by this gem
+
+  title(the_title, show_title) # sets `content_for :title` with title
+  subtitle(subtitle)           # sets `content_for :subtitle` with subtitle
+  show_title?                  # returns true or false based on show_title in title
+
+  stylesheet(file)             # Adds a stylesheet tag to `content_for :stylesheet`
+  javascript(file)             # Adds a javascript tag to `content_for :javascript`
+
+  flash_message                # generates a flash message alert box

@@ -1,60 +1,45 @@
-#Rails.application.routes.draw do
-#  root to: redirect('/about.html')
-#
-Rails.application.routes.draw do
- root to: 'visitors#new'
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
+Mcblooms::Application.routes.draw do
+  resources :ingredients
 
-  # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  get "registration/new"
+  mount Ckeditor::Engine => "/ckeditor"
+  resources :categories do
+    resources :products do
+      resources :prices
+    end
+  end
+  resources :pages
 
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
+  resources :products do
+    resources :prices
+  end
+  resource :cart, controller: :cart, path: 'your-basket', only: [:show, :destroy, :update] do
+    resource :checkout, controller: :checkout, only: [:show, :create]
+  end
+  resources :my_orders, only: [:index, :show]
 
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
+  post "my-basket/add/:product_id/:price_id", to: 'cart_items#update', as: :add_to_cart
+  delete "my-basket/remove/:product_id/:price_id", to: 'cart_items#destroy', as: :remove_from_cart
 
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
+  resource :my_profile, path: 'my-profile', controller: 'my_profile' do
+    resources :addresses do
+      member do
+        post :mark_default
+      end
+    end
+    resources :favorites, only: [:index, :update, :destroy]
+  end
 
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
+  get "register", to: 'registration#new', as: :registration
+  post "register", to: 'registration#create'
 
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
+  resources :menus
+  resources :users
 
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
+  get "signin", to: "sessions#new", as: :signin
+  get "signout", to: "sessions#destroy", as: :signout
+  resources :sessions, only: [:create]
+  resources :password_reset, only: [:new, :create, :edit, :update], controller: :password_reset
 
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
-
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
+  root 'home#index'
 end

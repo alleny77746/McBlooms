@@ -41,4 +41,54 @@ development:
     # Preload all models in development, needed when models use
     # inheritance. (default: false)
     # preload_models: false
-"mongoid.ci.yml" [noeol] 76L, 2628C                                
+
+    # Protect id and type from mass assignment. (default: true)
+    # protect_sensitive_fields: true
+
+    # Raise an error when performing a #find and the document is not found.
+    # (default: true)
+    # raise_not_found_error: true
+
+    # Raise an error when defining a scope with the same name as an
+    # existing method. (default: false)
+    # scope_overwrite_exception: false
+
+    # Skip the database version check, used when connecting to a db without
+    # admin access. (default: false)
+    # skip_version_check: false
+
+    # User Active Support's time zone in conversions. (default: true)
+    # use_activesupport_time_zone: true
+
+    # Ensure all times are UTC in the app side. (default: false)
+    # use_utc: false
+test:
+  sessions:
+    default:
+      database: mcblooms_test
+      hosts:
+        - localhost:27017
+      options:
+        # consistency: :strong
+        # In the test environment we lower the retries and retry interval to
+        # low amounts for fast failures.
+        max_retries: 1
+        retry_interval: 0
+
+staging:
+  sessions:
+    default:
+      database: mcblooms_staging
+      hosts:
+        - localhost:27017
+      options:
+        #
+
+production:
+  sessions:
+    default:
+      database: mcblooms_production
+      hosts:
+        - localhost:27017
+      options:
+        #

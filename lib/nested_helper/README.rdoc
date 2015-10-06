@@ -1,0 +1,11 @@
+= AnlekNestedHelper
+
+This project rocks and uses MIT-LICENSE.
+
+== Methods added by this gem
+
+```ruby
+  nested_objects(f, :images, {label: "Add more images"})
+  remove_nested_item(f, {}) #Your item must have a class of "item"
+  generate_nested_template(f, method, {})
+```

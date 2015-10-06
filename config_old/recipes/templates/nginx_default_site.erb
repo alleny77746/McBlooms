@@ -1,0 +1,23 @@
+server {
+  listen 80 default;
+
+  access_log  <%= app_path %>/_default/log/default.access.log;
+  error_log  <%= app_path %>/_default/log/default.error.log;
+
+  root <%= app_path %>/_default;
+
+  error_page 404 /404.html;
+
+  # Everything is a 404
+  location / {
+      alias <%= app_path %>/_default/;
+      log_not_found  off;
+      access_log off;
+      return 404;
+  }
+
+  location  /404.html {
+      internal;
+  }
+
+}

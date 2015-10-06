@@ -1,0 +1,126 @@
+= AnlekBootstrapHelper
+Designed to help you write bootstrap code faster and easier
+
+Built by {Andrew Kalek}(https://github.com/anlek) @ {Anlek Consulting}(http://anlek.com)
+
+_This project rocks and uses MIT-LICENSE._
+
+== Badge Helper
+Gives you the ability to add a label
+=== Adds helper method
+  tb_badge "text"
+
+==== Options
+  icon    # Specify what icon to put in front of the label. _default 'none'_
+  tag     # Specify what tag the label should have, _default is 'span'_
+
+Rest of the options get passed to the content tag for the badge
+
+
+== Button Helpers
+
+=== Adds helper methods like
+
+* link_to_btn
+* list_btn_for User
+* new_btn_for User
+* edit_btn_for User.new
+* delete_btn_for User.new
+* cancel_btn_for User.new
+
+=== CanCan
+
+If you are using CanCan in your main project, keep in mind that the follow helpers will automatically send cancan request:
+* list_btn_for   # if can? :read, Model
+* new_btn_for    # if can? :create, Model
+* edit_btn_for   # if can? :update, Model
+* delete_btn_for # if can? :delete, Model
+
+
+== Label Helper
+Gives you the ability to add a label
+=== Adds helper method
+  tb_label "text"
+
+==== Options
+  icon    # Specify what icon to put in front of the label. _default 'none'_
+  tag     # Specify what tag the label should have, _default is 'span'_
+  type    # Specify what type of label it is. _default is 'default'_
+
+Rest of the options get passed to the content tag for the label
+
+
+== List Groups
+Allows you to create {list groups}[http://getbootstrap.com/components/#list-group].
+
+  tb_list_group.do |l|
+    l.item "My First Item"
+    l.item do
+      <em>My second item</em>
+    end
+    l.item url: "http://google.com" do
+      My linked item
+    end
+    l.item do |item|
+      item.heading "Big heading"
+      item.text do
+        long paragraph could go here
+      end
+    end
+  end
+
+== Modals
+Now you can use Modals
+
+  <%= tb_modal options do |m| %>          # options default: {}
+    <% m.header "title", show_close %>    # show_close default: true
+    <% m.body do %>
+      this is my body
+    <% end %>
+    <% m.footer do %>
+      <input type="button" value="Close" data-dismiss="modal">
+    <% end %>
+  <% end %>
+
+=== Options
+Modal takes the following options
+  fade: true | false       # default: true
+  id: string               # default: blank string
+  size: "lg" | "sm"        # default: lg
+
+== Panels
+Make panels by doing the following:
+
+  <%= tb_panel id: "product_description", style: "primary" do |p| %>
+    <% p.heading "Description", title: true|false %> # you can sent true | false to heading to wrap with title tag
+    <% p.body do %>
+      ... stuff ...
+    <% end %>
+    <% p.content do %>
+      ... stuff that will not be surrounded by panel-body ...
+      ... good for tables or lists ...
+    <% end %>
+    <% p.footer do %>
+      ... footer! ...
+    <% end %>
+  <% end %>
+
+=== Options
+  Panels can be collapsable if the following options are sent
+    parent_id: string        # this is the div with class "panel-group" id. Usually surrounding the panels
+    collapse_id: string      # default: blank string
+  Also, when setting p.body (on a collapsable panel), you can send in:
+    open: true | false       # default false
+
+
+== Tabs
+To make tabs
+
+  <%= tb_tab id: "myTab" do |t| %>
+    <% t.add "Home" do %>
+      ... home tab content ...
+    <% end %>
+    <% t.add "Profile", active: true do %>
+      ... profile tab content ...
+    <% end %>
+  <% end %>
