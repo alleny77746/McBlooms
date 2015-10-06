@@ -1,4 +1,5 @@
 load "config/recipes/base"
+
 load "config/recipes/bundler"
 
 # set :environments, [:Staging, :Production, :Testing]
@@ -22,7 +23,7 @@ set :user, 'greg'
 
 set :scm, :git
 # set :repository,  "git@gitlab.anlek.com:#{git_repo}.git"
-set :repository, "@git@github.com:alleny77746:#(McBlooms).git"
+set :repository, "git@alleny77746.git:/McBlooms.git"
 
 set :deploy_to, "#{app_path}/#{application}/#{rails_env}"
 set :deploy_via, :remote_cache
