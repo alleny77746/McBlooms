@@ -22,7 +22,7 @@ set :user, 'greg'
 
 set :scm, :git
 # set :repository,  "git@gitlab.anlek.com:#{git_repo}.git"
-set :repository, "@git@github.com:alleny77746/McBlooms.git"
+set :repository, "@git@github.com:alleny77746:#(McBlooms).git"
 
 set :deploy_to, "#{app_path}/#{application}/#{rails_env}"
 set :deploy_via, :remote_cache
@@ -35,6 +35,7 @@ set :maintenance_template_path, File.expand_path("../recipes/templates/maintenan
 
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
+
 
 
 after "deploy", "deploy:cleanup" # keep only the last 5 releases
