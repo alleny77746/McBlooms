@@ -17,7 +17,8 @@ set :git_repo, "basket-company/mcblooms" #If application can't be the repo nname
 
 ### NOTE: DO NOT CHANGE ANYTHING BELOW ###
 
-set :user, 'deployer'
+#set :user, 'deployer'
+set :user, 'greg'
 
 set :scm, :git
 # set :repository,  "git@gitlab.anlek.com:#{git_repo}.git"
